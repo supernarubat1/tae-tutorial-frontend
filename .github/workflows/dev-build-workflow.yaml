@@ -1,0 +1,25 @@
+name: DEV - Build
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+env:
+  APP_NAME: tae-tutorial-frontend
+  CONTAINER_REPOSITORY: "acrtaetutorial001.azurecr.io"
+  IMAGE_TAG: "0.0.1-SNAPSHOT"
+
+jobs:
+  unitest:
+    name: UnitTest
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
