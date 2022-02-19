@@ -21,5 +21,22 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Unit test
+        run: npm run test:unit
+
+      - name: Upload Reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: Unit Test Results
+          path: "${{ github.workspace }}/coverage/lcov-report/*"
